@@ -59,6 +59,14 @@
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
 
+// For UK layout map fn-; to # and fn-' to ~
+#define Key_Hash (Key) { HID_KEYBOARD_BACKSLASH_AND_PIPE, KEY_FLAGS }
+#define Key_Tilde LSHIFT(Key_Hash)
+// For UK layout re-map \ and | to match keycaps
+#undef Key_Backslash
+#define Key_Backslash Key_NonUsBackslashAndPipe
+#undef Key_Pipe
+#define Key_Pipe LSHIFT(Key_NonUsBackslashAndPipe)
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
   * The names aren't particularly important. What is important is that each
@@ -171,7 +179,7 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
+                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  Key_Hash,         Key_Tilde,
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
    ___)
